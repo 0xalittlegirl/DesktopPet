@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://biogp23vkrrba"]
+
+[ext_resource type="Texture2D" uid="uid://cb4dxiw04bwho" path="res://assets/tile05.png" id="1_ho5ap"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1fepj"]
+texture = ExtResource("1_ho5ap")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(0, 0, 31, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fj74k"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0.65, 0.65, 0.65, 0.835294)
+
+[node name="Clock" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(90, 54)
+layout_mode = 0
+offset_right = 90.0
+offset_bottom = 54.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_1fepj")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+text = "30: 30"
+label_settings = SubResource("LabelSettings_fj74k")
+horizontal_alignment = 1
+vertical_alignment = 1

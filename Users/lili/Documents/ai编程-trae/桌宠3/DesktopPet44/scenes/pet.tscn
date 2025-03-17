@@ -1,0 +1,190 @@
+[gd_scene load_steps=18 format=3 uid="uid://bwxttvui2774s"]
+
+[ext_resource type="Script" path="res://scenes/pet.gd" id="1_pjd2a"]
+[ext_resource type="Texture2D" uid="uid://d0qf8cklsv0e7" path="res://assets/player.png" id="2_pgadw"]
+[ext_resource type="Texture2D" uid="uid://cb4dxiw04bwho" path="res://assets/tile05.png" id="3_2rs2u"]
+[ext_resource type="PackedScene" uid="uid://mixw5jsqxovi" path="res://scenes/llmapi.tscn" id="4_300yy"]
+[ext_resource type="PackedScene" uid="uid://cnkt2gcxqrnef" path="res://scenes/rocket.tscn" id="5_3hnuv"]
+[ext_resource type="Script" path="res://scenes/fire_window.gd" id="5_yfg1v"]
+[ext_resource type="Gradient" uid="uid://bj0kij4yjmd5k" path="res://colors/color01.tres" id="7_0vq3q"]
+[ext_resource type="Script" path="res://scenes/home_window.gd" id="7_7g47i"]
+[ext_resource type="PackedScene" uid="uid://c8f6xxb2xjlwh" path="res://scenes/home.tscn" id="7_po47n"]
+[ext_resource type="Gradient" uid="uid://j5xyg0gfol2m" path="res://colors/color02.tres" id="8_0txoc"]
+[ext_resource type="Gradient" uid="uid://d2wtk86o4ixcj" path="res://colors/color03.tres" id="9_f7lel"]
+
+[sub_resource type="Animation" id="Animation_okytx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hhly5"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_5564x"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nslo7"]
+_data = {
+"RESET": SubResource("Animation_okytx"),
+"idle": SubResource("Animation_hhly5"),
+"walk": SubResource("Animation_5564x")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lf4sb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2k3wu"]
+texture = ExtResource("3_2rs2u")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(0, 0, 31, 32)
+
+[node name="Pet" type="Node2D"]
+script = ExtResource("1_pjd2a")
+metadata/_edit_vertical_guides_ = [-263.0, 579.0, 1992.0, -1554.0]
+metadata/_edit_horizontal_guides_ = [11.0, -76.0, 1239.0]
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(310, 382)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_nslo7")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(4, 4)
+texture = ExtResource("2_pgadw")
+hframes = 19
+
+[node name="Area2D" type="Area2D" parent="Player/Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Sprite2D/Area2D"]
+position = Vector2(0, 4.25)
+shape = SubResource("CircleShape2D_lf4sb")
+
+[node name="Polygon2DPlayer" type="Polygon2D" parent="Player"]
+visible = false
+position = Vector2(-2, 4)
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-53, -44, 59, -45, 59, 66, -53, 66)
+
+[node name="Polygon2DMenu" type="Polygon2D" parent="Player"]
+visible = false
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-282, -376, 285, -376, 287, 76, -283, 79)
+
+[node name="Control" type="Control" parent="Player"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -257.0
+offset_top = -347.0
+offset_right = -257.0
+offset_bottom = -347.0
+pivot_offset = Vector2(250, 300)
+
+[node name="PanelContainer" type="PanelContainer" parent="Player/Control"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 520.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2k3wu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player/Control/PanelContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Player/Control/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.49, 0.49, 0.49, 1)
+theme_override_font_sizes/normal_font_size = 24
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="LineEdit" type="LineEdit" parent="Player/Control/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 24
+placeholder_text = "你想聊些啥"
+max_length = 40
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+
+[node name="LLMAPI" parent="." instance=ExtResource("4_300yy")]
+
+[node name="FireWindow" type="Window" parent="."]
+transparent_bg = true
+use_hdr_2d = true
+visible = false
+borderless = true
+always_on_top = true
+transparent = true
+mouse_passthrough = true
+script = ExtResource("5_yfg1v")
+rocket_scene = ExtResource("5_3hnuv")
+colors = Array[Gradient]([ExtResource("7_0vq3q"), ExtResource("8_0txoc"), ExtResource("9_f7lel")])
+
+[node name="HomeWindow" type="Window" parent="."]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(600, 600)
+visible = false
+borderless = true
+always_on_top = true
+transparent = true
+script = ExtResource("7_7g47i")
+
+[node name="Home" parent="HomeWindow" instance=ExtResource("7_po47n")]
+position = Vector2(300, 500)
+scale = Vector2(3, 3)
+
+[node name="AudioStreamPlayer" parent="HomeWindow/Home" index="8"]
+volume_db = -20.0
+
+[editable path="HomeWindow/Home"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbq5g2ek0c035"]
+
+[ext_resource type="Script" path="res://scenes/fire_work.gd" id="1_w4bcw"]
+[ext_resource type="Gradient" uid="uid://d2wtk86o4ixcj" path="res://colors/color03.tres" id="1_y6jmq"]
+[ext_resource type="Gradient" uid="uid://j5xyg0gfol2m" path="res://colors/color02.tres" id="2_amvva"]
+[ext_resource type="Texture2D" uid="uid://dtjwyaseffrya" path="res://assets/spotlight_1.png" id="3_n1m6b"]
+[ext_resource type="AudioStream" uid="uid://b5tl3jolussug" path="res://assets/firework_explosion_002.wav" id="3_ops80"]
+[ext_resource type="Texture2D" uid="uid://caanlbv7b3akx" path="res://assets/spotlight_4.png" id="3_twkav"]
+
+[sub_resource type="Curve" id="Curve_3e1tn"]
+_data = [Vector2(0.00164203, 0.114373), 0.0, 0.0, 0, 0, Vector2(0.164204, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.468984), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="FireWork" type="Node2D"]
+script = ExtResource("1_w4bcw")
+color = ExtResource("2_amvva")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 400
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.95
+texture = ExtResource("3_twkav")
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 98)
+initial_velocity_min = 50.0
+initial_velocity_max = 300.0
+damping_min = 50.0
+damping_max = 50.0
+scale_amount_min = 0.3
+scale_amount_curve = SubResource("Curve_3e1tn")
+color_ramp = ExtResource("1_y6jmq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ops80")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 4.0
+texture = ExtResource("3_n1m6b")
+texture_scale = 4.0

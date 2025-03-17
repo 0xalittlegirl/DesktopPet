@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://bwxttvui2774s"]
 
-[ext_resource type="Script" path="res://scenes/pet.gd" id="1_pjd2a"]
+[ext_resource type="Script" uid="uid://g885p1fgfmnv" path="res://scenes/pet.gd" id="1_pjd2a"]
 [ext_resource type="Texture2D" uid="uid://d0qf8cklsv0e7" path="res://assets/player.png" id="2_pgadw"]
 [ext_resource type="Texture2D" uid="uid://cb4dxiw04bwho" path="res://assets/tile05.png" id="3_2rs2u"]
 [ext_resource type="PackedScene" uid="uid://mixw5jsqxovi" path="res://scenes/llmapi.tscn" id="4_300yy"]
 [ext_resource type="PackedScene" uid="uid://cnkt2gcxqrnef" path="res://scenes/rocket.tscn" id="5_3hnuv"]
-[ext_resource type="Script" path="res://scenes/fire_window.gd" id="5_yfg1v"]
+[ext_resource type="Script" uid="uid://eudsgronxoht" path="res://scenes/fire_window.gd" id="5_yfg1v"]
 [ext_resource type="Gradient" uid="uid://bj0kij4yjmd5k" path="res://colors/color01.tres" id="7_0vq3q"]
-[ext_resource type="Script" path="res://scenes/home_window.gd" id="7_7g47i"]
+[ext_resource type="Script" uid="uid://cca7c2b7jppw4" path="res://scenes/home_window.gd" id="7_7g47i"]
 [ext_resource type="PackedScene" uid="uid://c8f6xxb2xjlwh" path="res://scenes/home.tscn" id="7_po47n"]
 [ext_resource type="Gradient" uid="uid://j5xyg0gfol2m" path="res://colors/color02.tres" id="8_0txoc"]
 [ext_resource type="Gradient" uid="uid://d2wtk86o4ixcj" path="res://colors/color03.tres" id="9_f7lel"]
@@ -64,12 +64,13 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nslo7"]
 _data = {
-"RESET": SubResource("Animation_okytx"),
-"idle": SubResource("Animation_hhly5"),
-"walk": SubResource("Animation_5564x")
+&"RESET": SubResource("Animation_okytx"),
+&"idle": SubResource("Animation_hhly5"),
+&"walk": SubResource("Animation_5564x")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lf4sb"]
+radius = 13.7863
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2k3wu"]
 texture = ExtResource("3_2rs2u")
@@ -89,7 +90,7 @@ position = Vector2(310, 382)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
-"": SubResource("AnimationLibrary_nslo7")
+&"": SubResource("AnimationLibrary_nslo7")
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
@@ -105,7 +106,7 @@ shape = SubResource("CircleShape2D_lf4sb")
 
 [node name="Polygon2DPlayer" type="Polygon2D" parent="Player"]
 visible = false
-position = Vector2(-2, 4)
+position = Vector2(-1, 10)
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-53, -44, 59, -45, 59, 66, -53, 66)
 
